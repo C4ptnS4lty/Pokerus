@@ -23,13 +23,7 @@ def create_app():
     
 
 # Check if DATABASE_URL exists, and if not, use a fallback
-    db_url = os.getenv("DATABASE_URL")
-    if db_url:
-        # Convert "postgres://" to "postgresql://" if needed for SQLAlchemy compatibility
-        app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace("postgres://", "postgresql://", 1) + "?sslmode=require"
-    else:
-        # Fallback to a local SQLite database (for local development/testing only)
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///local_database.db"
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = True
