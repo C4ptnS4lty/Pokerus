@@ -8,18 +8,21 @@
   </div>
   <div class="container">
     <h1>Check out some of these Pokemon!</h1>
-
-    <div class="card" style="width: 18rem;">
-      <img src= "{{ pokemon.sprite }}" class="card-img-top" alt="sprite">
-      <div class="card-body">
-        <h5 class="card-title">{{ pokemon.name | capitalize }}</h5>
-        <p class="card-text">Type: {{ pokemon.types | join(', ') }}</p>
-        <p class="card-text">Abilities: {{ pokemon.abilities | join(', ') }}</p>
-        <a href="/pokemon-info?pokemon_name={{pokemon.name}}" class="btn btn-primary" >Info</a>
-        <a href="/pokemon-caught?pokemon_name={{pokemon.name}}" class="btn">
-          <img  src= "/static/images/icons/catch.png" style="width: 2rem;">
-        </a>
+    {% if pokemon %}
+      <div class="card" style="width: 18rem;">
+        <img src= "{{ pokemon.sprite }}" class="card-img-top" alt="sprite">
+        <div class="card-body">
+          <h5 class="card-title">{{ pokemon.name | capitalize }}</h5>
+          <p class="card-text">Type: {{ pokemon.types | join(', ') }}</p>
+          <p class="card-text">Abilities: {{ pokemon.abilities | join(', ') }}</p>
+          <a href="/pokemon-info?pokemon_name={{pokemon.name}}" class="btn btn-primary" >Info</a>
+          <a href="/pokemon-caught?pokemon_name={{pokemon.name}}" class="btn">
+            <img  src= "/static/images/icons/catch.png" style="width: 2rem;">
+          </a>
+        </div>
       </div>
     </div>
-</div>
+  {% else %}
+    <p>No Pokemon data available</p>
+  {% endif %}
 {% endblock %}
