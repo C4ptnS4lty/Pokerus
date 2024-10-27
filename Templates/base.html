@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>PokéRus</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+          <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        </head>
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    <nav class="navbar navbar-expand-lg bg-body-secondary">
+        <div class="container-fluid">
+            <img src="/static/images/pokeruslogo.png" alt="logo">
+            <span class="navbar-brand mb-0 h1">PokéRus</span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if g.user %}
+              <li class = 'nav-item'>
+                <a href="/users/{{ g.user.id }}">
+                  <img src="{{ g.user.image_url }}" alt="{{ g.user.username }}" style="width: 2rem;">
+                </a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+              {% if not g.user %}
+              <li class="nav-item">
+                <a class="nav-link active text-primary" aria-current="page" href="/signup">Sign up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active text-primary" aria-current="page" href="/login">Log in</a>
+              </li>
+              {% endif %}
+              {% if g.user %}
+              <li class="nav-item">
+                <a class="nav-link active text-primary" aria-current="page" href="/logout">Log out</a>
+              </li>
+              {% endif %}
+            </ul>
+        
+            <form class="d-flex" role="search" action="{{ url_for('pokemon_info') }}" method="GET">
+              <input class="form-control me-2" type="search" placeholder="Search for Pokemon!" aria-label="Search" name="pokemon_name">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+<nav class="navbar navbar-expand">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+  </div>
+</nav>
+<div class="container">
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{ category }}">{{ message }}</div>
+  {% endfor %}
+
+  {% block content %}
+  {% endblock %}
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
