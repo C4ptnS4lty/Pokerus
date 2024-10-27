@@ -22,10 +22,9 @@ def create_app():
     """Factory function to create Flask application and initialize extensions."""
     
 
-# Check if DATABASE_URL exists, and if not, use a fallback
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # Configure database using environment variable
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Suppress SQLAlchemy event warnings
     app.config['SQLALCHEMY_ECHO'] = True
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
