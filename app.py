@@ -209,9 +209,9 @@ def homepage():
             for id in favorites_list:
                 pokemon = basicpokedata(id.name)
                 pokemonlst.append(pokemon)
+            return render_template(template, pokemonlst=pokemonlst)
         
-
-        return render_template(template, pokemonlst=pokemonlst)
+        return render_template(template)
 
 
     # Fetching data about a specific Pokémon (e.g., Pikachu)
