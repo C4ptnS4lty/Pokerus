@@ -23,7 +23,11 @@ def create_app():
     
 
     # Configure database using environment variable
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Suppress SQLAlchemy event warnings
     app.config['SQLALCHEMY_ECHO'] = True
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
