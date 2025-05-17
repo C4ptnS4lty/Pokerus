@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from dotenv import load_dotenv
 from models import Favorites, User, Pokemon, db, pb
 from forms import UserAddForm, LoginForm, UserForm
-
+ 
 load_dotenv()
 #API Info
 # The 'pb' from models will be our main easy way to communicate with the api following the 
