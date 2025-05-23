@@ -19,7 +19,7 @@ Pokémon Catcher is a simple Flask web app that allows users to search for Poké
 ## Tech Stack
 
 - **Backend:** Python, Flask, SQLAlchemy
-- **Frontend:** HTML, CSS, JavaScript (Jinja2 templates)
+- **Frontend:** HTML, CSS, Pyhton3
 - **Database:** PostgreSQL
 - **Auth:** Flask-Login, bcrypt
 
